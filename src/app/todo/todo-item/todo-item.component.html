@@ -4,7 +4,7 @@
     <div class="view">
         <input class="toggle" type="checkbox" [formControl]="checkField" [checked]="todoItem.completado">
         <label (dblclick)="editar()">{{todoItem.texto}}</label>
-        <button class="destroy"></button>
+        <button class="destroy" (click)="eliminar()"></button>
     </div>
-    <input class="edit" value="Create a TodoMVC template" [value]="todoItem.texto" [formControl]="txtInput" (blur)="terminarEdicion()" #txtInputFisico>
+    <input class="edit" value="Create a TodoMVC template" [value]="todoItem.texto" [formControl]="txtInput" (keyup.Enter)="terminarEdicion()" (blur)="terminarEdicion()" #txtInputFisico>
 </li>

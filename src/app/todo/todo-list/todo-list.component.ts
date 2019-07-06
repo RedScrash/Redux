@@ -10,7 +10,7 @@ import { Todo } from '../model/todo.model';
 })
 export class TodoListComponent implements OnInit {
 
-  todos: Todo[] = []; 
+  todos: Todo[] = [];
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {

@@ -17,8 +17,8 @@ export function todoReducer(state= estadoInicial, action: fromTodo.Acciones): To
         case fromTodo.TOGGLE_TOD:
             // El operador map() funciona como un foreach recorre todos los elementos
             // que se encuentran en el state, devuelve un nuevo array de elementos
-            return state.map( todoEdit =>{
-                if (todoEdit.id === action.id){
+            return state.map( todoEdit => {
+                if (todoEdit.id === action.id) {
                     // El operador spread "..." permite clonar el elemento, adicionalmente permite cambiar
                     // las propiedades del objecto clonado "...todoEdit, completado: !todoEdit.completado"
                     // para este caso clona el objeto todoEdit y luego permite cambiar la propiedad
@@ -31,6 +31,24 @@ export function todoReducer(state= estadoInicial, action: fromTodo.Acciones): To
                     return todoEdit;
                 }
             });
+        case fromTodo.EDITAR_TODO:
+            return state.map(todoEdit => {
+                if (todoEdit.id === action.id) {
+                    return {
+                        ...todoEdit,
+                        texto: action.text
+                    };
+                } else {
+                    return todoEdit;
+                }
+            });
+        case fromTodo.ELIMINAR_TODO:
+            // return state.map( todoEdit => {
+            //     if ( todoEdit.id !== action.id) {
+            //         return todoEdit;
+            //     }
+            // });
+            return state.filter( todoItem => todoItem.id !== action.id);
         default:
             return state;
     }
