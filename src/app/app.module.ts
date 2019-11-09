@@ -19,6 +19,7 @@ import { TodoItemComponent } from './todo/todo-item/todo-item.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { TodoComponent } from './todo/todo.component';
 import { appReducers } from './app.reducers';
+import { FilterPipe } from './filter/filter.pipe';
 
 
 
@@ -30,7 +31,8 @@ import { appReducers } from './app.reducers';
     TodoAddComponent,
     TodoItemComponent,
     TodoListComponent,
-    TodoComponent
+    TodoComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
