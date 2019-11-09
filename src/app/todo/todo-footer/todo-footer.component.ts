@@ -36,7 +36,7 @@ export class TodoFooterComponent implements OnInit {
     this.pendientes = todos.filter( item => !item.completado ).length;
   } 
 
-  private clearCompleted(): void {
+  public clearCompleted(): void {
     const action = new fromTodoActions.ClearCompleted();
     this._store.dispatch(action);
   }
