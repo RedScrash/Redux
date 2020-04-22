@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ingresoegresoapp-2620f": {
+      "hosting": {
+        "ingresoEgresoApp": [
+          "ingresoegresoapp-2620f"
+        ]
+      }
+    }
+  }
+}
