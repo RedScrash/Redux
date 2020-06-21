@@ -1,20 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
-import { increment } from './counter.actions';
+import { isLoading, stopLoading } from './ui.actions';
 
 export interface State {
-    key: String; 
+    isLoading: boolean;
 }
 
 export const initialState: State = {
-   key: 'hola',
+    isLoading: false,
 }
 
-const _counterReducer = createReducer(initialState,
+const _uiReducer = createReducer(initialState,
 
-    on(increment, state => ({ ...state, key: 'hola'})),
-
+    on(isLoading, state => ({ ...state, isLoading: true})),
+    on(stopLoading, state => ({ ...state, isLoading: false})),
 );
 
-export function counterReducer(state, action) {
-    return _counterReducer(state, action);
+export function uiReducer(state, action) {
+    return _uiReducer(state, action);
 }
