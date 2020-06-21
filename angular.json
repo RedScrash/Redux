@@ -135,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "ingresoEgresoApp"
+  "defaultProject": "ingresoEgresoApp",
+  "cli": {
+    "analytics": false
+  }
 }
