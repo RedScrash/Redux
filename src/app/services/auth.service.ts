@@ -3,17 +3,33 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario.model';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.reducer';
+import * as actions from '../auth/auth.actions';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  public subscription: Subscription;
   constructor(private auth: AngularFireAuth,
-    public firestore: AngularFirestore) { }
+    public firestore: AngularFirestore,
+    private store: Store<AppState>) { }
 
   public initAuthListener() {
-    this.auth.authState.subscribe();
+    this.auth.authState.subscribe( (fuser) => {
+      if (fuser) {
+        this.subscription = this.firestore.doc(`${fuser.uid}/usuario`).valueChanges().subscribe((result: any) => {
+          const myUser = Usuario.fromFirebase(result);
+          this.store.dispatch(actions.setUser({user: myUser}));
+        });
+      } else {
+        this.subscription.unsubscribe();
+        this.store.dispatch(actions.unSetUser());
+      }
+    });
   }
 
   public crearUsuario (nombre: string, email: string, password: string) {

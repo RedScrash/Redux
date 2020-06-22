@@ -8,15 +8,15 @@ export interface State {
 
 export const initialState: State = {
     user: null,
-}
+};
 
-const _counterReducer = createReducer(initialState,
+const _authReducer = createReducer(initialState,
 
     on(actions.setUser, (state, {user}) => ({ ...state, user: {...user} })),
     on(actions.unSetUser, state => ({ ...state, user: null })),
 
 );
 
-export function counterReducer(state, action) {
-    return _counterReducer(state, action);
-}
+export function authReducer(state, action) {
+    return _authReducer(state, action);
+};
