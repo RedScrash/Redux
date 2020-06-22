@@ -14,18 +14,25 @@ import { Subscription } from 'rxjs';
 export class AuthService {
 
   public subscription: Subscription;
+  private _user: Usuario;
   constructor(private auth: AngularFireAuth,
     public firestore: AngularFirestore,
     private store: Store<AppState>) { }
+
+  public get user(): Usuario {
+    return {...this._user};
+  }
 
   public initAuthListener() {
     this.auth.authState.subscribe( (fuser) => {
       if (fuser) {
         this.subscription = this.firestore.doc(`${fuser.uid}/usuario`).valueChanges().subscribe((result: any) => {
           const myUser = Usuario.fromFirebase(result);
+          this._user = myUser;
           this.store.dispatch(actions.setUser({user: myUser}));
         });
       } else {
+        this._user = null;
         this.subscription.unsubscribe();
         this.store.dispatch(actions.unSetUser());
       }
