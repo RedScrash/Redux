@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
   ngOnInit() {
     this.subscription = [...this.subscription,
       this.store.select('auth').pipe(filter( (auth) => auth.user !== null)).subscribe((auth) => {
-        console.log(auth.user);
         this.subscription = [...this.subscription,
           this.service.initIngresosEgresosListener(auth.user.uid)
           .subscribe( (result: any) => {

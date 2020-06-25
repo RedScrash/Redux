@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       password: ['', Validators.required]
     });
     this.uiSubscription = this.store.select('ui').subscribe((state) => {
-      console.log('cargando subs');
       this.loading = state.isLoading;
     });
   }
@@ -53,7 +52,6 @@ export class LoginComponent implements OnInit, OnDestroy{
 
     this._authService.loginUsuario(email, password)
     .then( result => {
-      console.log(result);
       // Swal.close();
       this.store.dispatch(uiActions.stopLoading());
       this._router.navigate(['/']);
